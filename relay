@@ -259,6 +259,8 @@ cmd_init() {
   # Install iptables-persistent if missing
   if ! command -v netfilter-persistent &>/dev/null; then
     if confirm "Install iptables-persistent for rule persistence?"; then
+      info "Updating package lists..."
+      apt-get update >/dev/null 2>&1
       info "Installing iptables-persistent..."
       if DEBIAN_FRONTEND=noninteractive apt-get install -y iptables-persistent >/dev/null 2>&1; then
         success "iptables-persistent installed"
